@@ -1,8 +1,13 @@
 ---
+import '@/styles/nashville.css';
+import Body from '@/islands/nashville/Body';
+
 const { options, data } = Astro.props;
 ---
 
 <>
-  <div>Nashville Layout</div>
-  <div>{JSON.stringify(options)}</div>
+  <Body client:load />
+  <div class:list={['main', 'text-md md:text-lg min-h-screen']}>
+    Nashville Layout
+  </div>
 </>

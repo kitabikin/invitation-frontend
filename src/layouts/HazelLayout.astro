@@ -1,13 +1,39 @@
 ---
-import '@/styles/hazel.css';
+import '@/styles/hazel/hazel.css';
+import { Image } from '@astrojs/image/components';
 import Body from '@/islands/hazel/Body';
+import To from '@/islands/hazel/To';
+import { feature, featureTo } from '@/lib/featureHazel';
 
 const { options, data } = Astro.props;
+
+const featureData = feature(data.feature);
+const { fGeneral, fTo } = featureData;
+
+const featureDataGeneral = featureTo(fGeneral.column);
+const featureDataTo = featureTo(fTo.column);
+
+const { toImage } = featureDataTo;
 ---
 
 <>
   <Body client:load />
   <div class:list={['main', 'text-md md:text-lg min-h-screen']}>
+    <!-- Kepada -->
+    {
+      fTo && fTo.is_active && (
+        <To client:load options={options} to={featureDataTo}>
+          <Image
+            slot="image"
+            src={toImage.value}
+            alt={toImage.label}
+            width="100"
+            height="100"
+          />
+        </To>
+      )
+    }
+
     Hazel Layout
   </div>
 </>

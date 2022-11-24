@@ -5,7 +5,8 @@ export const featureNashvile = (data: any) => {
   const feature = featureReduce(data);
 
   const {
-    [`${CODE}-kepada`]: fKepada,
+    [`${CODE}-general`]: fGeneral,
+    [`${CODE}-kepada`]: fTo,
     [`${CODE}-musik`]: fMusik,
     [`${CODE}-snowflakes`]: fSnowflakes,
     [`${CODE}-sampul`]: fSampul,
@@ -29,7 +30,8 @@ export const featureNashvile = (data: any) => {
   } = feature;
 
   return {
-    fKepada,
+    fGeneral,
+    fTo,
     fMusik,
     fSnowflakes,
     fSampul,

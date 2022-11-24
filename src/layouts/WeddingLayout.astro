@@ -1,0 +1,24 @@
+---
+import '@/styles/base.css';
+import BaseHead from '@/layouts/BaseHead.astro';
+import FooterTheme from '@/components/footer/FooterTheme.astro';
+
+const { data } = Astro.props;
+
+const meta = {
+  title: `Pernikahan ${data.name}`,
+  description: data.description,
+  route: Astro.url.pathname,
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead meta={meta} />
+  </head>
+  <body>
+    <slot />
+    <FooterTheme />
+  </body>
+</html>

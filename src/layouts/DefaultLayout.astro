@@ -1,0 +1,24 @@
+---
+import '@/styles/base.css';
+import BaseHead from '@/layouts/BaseHead.astro';
+
+const { ...customMeta } = Astro.props;
+const meta = { ...customMeta };
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead meta={meta} />
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <style>
+      body {
+        @apply bg-white;
+      }
+    </style>
+  </body>
+</html>

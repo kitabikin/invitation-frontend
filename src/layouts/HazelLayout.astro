@@ -1,0 +1,21 @@
+---
+import '@/styles/hazel.css';
+import Body from '@/islands/hazel/Body';
+
+const { options, data } = Astro.props;
+---
+
+<>
+  <Body client:load />
+  <div class:list={['main', 'text-md md:text-lg min-h-screen']}>
+    Hazel Layout
+  </div>
+</>
+
+<style>
+  .main {
+    background-color: var(--hazel-bg-color);
+    color: var(--hazel-color-body);
+    font-family: 'nashvilleBody';
+  }
+</style>

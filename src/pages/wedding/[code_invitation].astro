@@ -1,0 +1,62 @@
+---
+import qs from 'qs';
+import { modifyData } from '@/lib/modifyData';
+import WeddingLayout from '@/layouts/WeddingLayout.astro';
+import SwitcherLayout from '@/layouts/SwitcherLayout.astro';
+
+const coreUrl = import.meta.env.PUBLIC_CORE_URL;
+const { code_invitation } = Astro.params;
+const guest = Astro.url.searchParams.get('to')! || 'Tamu Undangan';
+
+const getSingleInvitation = async (code_invitation: string) => {
+  const pParams = {
+    where: [{ 'event:code': 'wedding' }],
+    with: [
+      { event: true },
+      { theme: true },
+      { invitation_feature: true },
+      { invitation_feature_data: true },
+    ],
+  };
+
+  const merge = qs.stringify(pParams);
+  const response = await fetch(
+    `${coreUrl}/v1/invitation/${code_invitation}?${merge}`,
+  );
+  const data = await response.json();
+  const invitation = data.data;
+
+  return invitation;
+};
+
+const getListInvitationGreeting = async (id: string) => {
+  const pParams = {
+    where: [{ is_active: true }, { is_delete: false }, { id_invitation: id }],
+    sort: 'created_at:desc',
+  };
+
+  const merge = qs.stringify(pParams);
+  const response = await fetch(`${coreUrl}/v1/invitation-greeting?${merge}`);
+  const data = await response.json();
+  const greeting = data.data;
+
+  return greeting;
+};
+
+const from = 'invitation';
+const invitation = await getSingleInvitation(code_invitation as string);
+const greeting = await getListInvitationGreeting(invitation.id_invitation);
+const data = await modifyData(from, invitation);
+
+const options = {
+  from,
+  guest,
+  id: invitation.id_invitation,
+  code: invitation.theme.code,
+  date: new Date(invitation.invitation_at),
+};
+---
+
+<WeddingLayout data={data}>
+  <SwitcherLayout options={options} data={data} greeting={greeting} />
+</WeddingLayout>

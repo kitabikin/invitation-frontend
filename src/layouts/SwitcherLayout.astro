@@ -1,0 +1,57 @@
+---
+import NavbarTheme from '@/components/navbar/NavbarTheme.astro';
+
+// Nashville
+import NashvilleThemeSwitcher from '@/islands/nashville/ThemeSwitcher';
+import NashvilleBaseLayout from '@/layouts/NashvilleLayout.astro';
+
+// Hazel
+import HazelThemeSwitcher from '@/islands/hazel/ThemeSwitcher';
+import HazelBaseLayout from '@/layouts/HazelLayout.astro';
+
+const { options, data, greeting } = Astro.props;
+const isFromTheme = options.from === 'theme';
+---
+
+{
+  (() => {
+    switch (options.code) {
+      case 'nashville':
+        return (
+          <>
+            {isFromTheme && (
+              <NavbarTheme theme={data.name}>
+                <NashvilleThemeSwitcher client:load />
+              </NavbarTheme>
+            )}
+            <main class:list={[{ 'mt-[190px] md:mt-[145px]': isFromTheme }]}>
+              <NashvilleBaseLayout
+                options={options}
+                data={data}
+                greeting={greeting}
+              />
+            </main>
+          </>
+        );
+      case 'hazel':
+        return (
+          <>
+            {isFromTheme && (
+              <NavbarTheme theme={data.name}>
+                <HazelThemeSwitcher client:load />
+              </NavbarTheme>
+            )}
+            <main class:list={[{ 'mt-[190px] md:mt-[145px]': isFromTheme }]}>
+              <HazelBaseLayout
+                options={options}
+                data={data}
+                greeting={greeting}
+              />
+            </main>
+          </>
+        );
+      default:
+        return null;
+    }
+  })()
+}

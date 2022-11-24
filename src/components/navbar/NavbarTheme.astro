@@ -1,0 +1,12 @@
+---
+const { theme } = Astro.props;
+---
+
+<nav class="fixed top-0 z-[700] w-full bg-gray-50 border-b border-b-gray-300">
+  <div class="mx-auto max-w-7xl py-4 px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <h4 class="text-xl">Tema {theme}</h4>
+      <slot />
+    </div>
+  </div>
+</nav>

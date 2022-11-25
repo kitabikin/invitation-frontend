@@ -5,12 +5,12 @@ import { themeAtom, overflowYAtom } from '@/store/nashvilleStore';
 
 export const Body = () => {
   const [overflowY, setOverflowY] = useAtom(overflowYAtom);
-  const initialTheme = `theme-green`;
+  const initialTheme = { value: 'theme-gold', label: 'Gold' };
   useHydrateAtoms([[themeAtom, initialTheme]]);
 
   useEffect(() => {
     const body = document.querySelector('body') as HTMLBodyElement;
-    body.classList.add(initialTheme);
+    body.classList.add(initialTheme.value);
   }, []);
 
   useEffect(() => {

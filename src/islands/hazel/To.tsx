@@ -1,41 +1,40 @@
 import cn from 'classnames';
-import { css } from '@stitches/core';
 import { useAtom } from 'jotai';
-import Button from '@/islands/hazel/Button';
-import { displayAtom, overflowYAtom, isPlayingAtom } from '@/store/hazelStore';
+import {
+  isDisplayAtom,
+  overflowYAtom,
+  isPlayingAtom,
+} from '@/store/hazelStore';
 
 export const To = ({ ...props }) => {
-  const [display, setDisplay] = useAtom(displayAtom);
+  const [isDisplay, setIsDisplay] = useAtom(isDisplayAtom);
   const [_, setOverflowY] = useAtom(overflowYAtom);
   const [isPlaying, setIsPlaying] = useAtom(isPlayingAtom);
 
   const { guest } = props.options;
   const { toImage, toTitle, toButtonLabel } = props.to;
 
-  const main = css({
-    backgroundColor: 'var(--hazel-bg-color)',
-    display: display,
-  });
-
-  const box = css({
-    backgroundImage: `var(--hazel-bg-to)`,
-  });
-
   const handleClick = () => {
-    setDisplay('none');
+    setIsDisplay(false);
     setIsPlaying(!isPlaying);
     setOverflowY('auto');
   };
 
   return (
     <>
-      <div className={cn(main(), 'fixed h-full w-full z-[600] opacity-100')}>
+      <div
+        className={cn(
+          'fixed h-full w-full z-[600] opacity-100',
+          'bg-[color:var(--hazel-bg-color)]',
+          isDisplay ? 'block' : 'hidden',
+        )}
+      >
         <div className={cn('mx-auto max-w-md h-full px-4')}>
           <div
             className={cn(
               'relative flex flex-col items-center justify-center text-center',
               'h-full w-full py-8 px-4 bg-center bg-no-repeat bg-contain',
-              box(),
+              'bg-[image:var(--hazel-bg-to)]',
             )}
           >
             {/* Kepada Image */}
@@ -55,8 +54,20 @@ export const To = ({ ...props }) => {
               {guest}
             </div>
 
-            <div className={cn('mt-4')}>
-              <Button onClick={handleClick}>{toButtonLabel.value}</Button>
+            <div className={cn('mt-5')}>
+              <button
+                type="button"
+                className={cn(
+                  'bg-white hover:bg-[color:var(--hazel-color-primary)]',
+                  'text-[color:var(--hazel-color-body)] hover:text-white',
+                  'border-2 border-[color:var(--hazel-color-primary)]',
+                  'italic font-bold text-sm rounded-full',
+                  'px-6 py-2',
+                )}
+                onClick={handleClick}
+              >
+                {toButtonLabel.value}
+              </button>
             </div>
           </div>
         </div>

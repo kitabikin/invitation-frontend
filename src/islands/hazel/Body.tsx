@@ -5,12 +5,12 @@ import { themeAtom, overflowYAtom } from '@/store/hazelStore';
 
 export const Body = () => {
   const [overflowY, setOverflowY] = useAtom(overflowYAtom);
-  const initialTheme = `theme-green`;
+  const initialTheme = { value: 'theme-green', label: 'Hijau' };
   useHydrateAtoms([[themeAtom, initialTheme]]);
 
   useEffect(() => {
     const body = document.querySelector('body') as HTMLBodyElement;
-    body.classList.add(initialTheme);
+    body.classList.add(initialTheme.value);
   }, []);
 
   useEffect(() => {

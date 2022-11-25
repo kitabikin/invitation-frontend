@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { useAtom } from 'jotai';
+import { IKImage, IKContext } from 'imagekitio-react';
 import {
   isDisplayAtom,
   overflowYAtom,
@@ -40,7 +41,19 @@ export const To = ({ ...props }) => {
             {/* Kepada Image */}
             {toImage && toImage.is_active && (
               <div className={cn('flex rounded-full overflow-hidden')}>
-                {props.image}
+                <IKContext urlEndpoint="https://ik.imagekit.io/kitabikincom">
+                  <IKImage
+                    src={toImage.value}
+                    alt={toImage.label}
+                    transformation={[
+                      {
+                        height: '100',
+                        width: '100',
+                      },
+                    ]}
+                    loading="lazy"
+                  />
+                </IKContext>
               </div>
             )}
 

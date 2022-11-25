@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import cn from 'classnames';
 import { Listbox, Transition } from '@headlessui/react';
-import { HiCheck, HiChevronUpDown } from 'react-icons/hi2';
+import { HiCheck, HiChevronUpDown } from 'react-icons/hi2/index.js';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@/store/hazelStore';
 

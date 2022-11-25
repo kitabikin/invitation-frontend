@@ -2,15 +2,17 @@
 import '@/styles/hazel/hazel.css';
 import Body from '@/islands/hazel/Body';
 import To from '@/islands/hazel/To';
-import { feature, featureTo } from '@/lib/featureHazel';
+import Music from '@/islands/hazel/Music';
+import { feature, featureTo, featureMusic } from '@/lib/featureHazel';
 
 const { options, data } = Astro.props;
 
 const featureData = feature(data.feature);
-const { fGeneral, fTo } = featureData;
+const { fGeneral, fTo, fMusic } = featureData;
 
 const featureDataGeneral = featureTo(fGeneral.column);
 const featureDataTo = featureTo(fTo.column);
+const featureDataMusic = featureMusic(fMusic.column);
 ---
 
 <>
@@ -20,6 +22,13 @@ const featureDataTo = featureTo(fTo.column);
     {
       fTo && fTo.is_active && (
         <To client:load options={options} to={featureDataTo} />
+      )
+    }
+
+    <!-- Musik -->
+    {
+      fMusic && fMusic.is_active && (
+        <Music client:load options={options} music={featureDataMusic} />
       )
     }
 

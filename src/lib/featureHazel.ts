@@ -7,7 +7,7 @@ export const feature = (data: any) => {
   const {
     [`${CODE}-general`]: fGeneral,
     [`${CODE}-kepada`]: fTo,
-    [`${CODE}-musik`]: fMusik,
+    [`${CODE}-musik`]: fMusic,
     [`${CODE}-snowflakes`]: fSnowflakes,
     [`${CODE}-sampul`]: fSampul,
     [`${CODE}-pembukaan`]: fPembukaan,
@@ -32,7 +32,7 @@ export const feature = (data: any) => {
   return {
     fGeneral,
     fTo,
-    fMusik,
+    fMusic,
     fSnowflakes,
     fSampul,
     fPembukaan,
@@ -84,5 +84,16 @@ export const featureTo = (data: any) => {
     toImage,
     toTitle,
     toButtonLabel,
+  };
+};
+
+export const featureMusic = (data: any) => {
+  const feature = featureReduce(data);
+
+  const code = `${CODE}-musik`;
+  const { [`${code}-song`]: musicSong } = feature;
+
+  return {
+    musicSong,
   };
 };

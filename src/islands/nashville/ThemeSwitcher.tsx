@@ -29,7 +29,11 @@ export const ThemeSwitcher = () => {
               'focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300',
             )}
           >
-            <span className="block truncate">{themeColor.label}</span>
+            {themeColor.label ? (
+              <span className="block truncate">{themeColor.label}</span>
+            ) : (
+              <span className="block truncate text-gray-400">Pilih Tema</span>
+            )}
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <HiChevronUpDown className="h-5 w-5 text-gray-400" />
             </span>

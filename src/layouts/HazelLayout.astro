@@ -3,20 +3,28 @@ import '@/styles/hazel/hazel.css';
 import Body from '@/islands/hazel/Body';
 import To from '@/islands/hazel/To';
 import Music from '@/islands/hazel/Music';
-import { feature, featureTo, featureMusic } from '@/lib/featureHazel';
+import Snowflakes from '@/islands/hazel/Snowflakes';
+import {
+  feature,
+  featureGeneral,
+  featureTo,
+  featureMusic,
+  featureSnowflakes,
+} from '@/lib/featureHazel';
 
 const { options, data } = Astro.props;
 
 const featureData = feature(data.feature);
-const { fGeneral, fTo, fMusic } = featureData;
+const { fGeneral, fTo, fMusic, fSnowflakes } = featureData;
 
-const featureDataGeneral = featureTo(fGeneral.column);
+const featureDataGeneral = featureGeneral(fGeneral.column);
 const featureDataTo = featureTo(fTo.column);
 const featureDataMusic = featureMusic(fMusic.column);
+const featureDataSnowflakes = featureSnowflakes(fSnowflakes.column);
 ---
 
 <>
-  <Body client:load />
+  <Body client:load options={options} general={featureDataGeneral} />
   <div class:list={['main', 'text-md md:text-lg min-h-screen']}>
     <!-- Kepada -->
     {
@@ -28,7 +36,18 @@ const featureDataMusic = featureMusic(fMusic.column);
     <!-- Musik -->
     {
       fMusic && fMusic.is_active && (
-        <Music client:load options={options} music={featureDataMusic} />
+        <Music client:idle options={options} music={featureDataMusic} />
+      )
+    }
+
+    <!-- Snowflakes -->
+    {
+      fSnowflakes && fSnowflakes.is_active && (
+        <Snowflakes
+          client:idle
+          options={options}
+          snowflakes={featureDataSnowflakes}
+        />
       )
     }
 

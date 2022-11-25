@@ -3,9 +3,15 @@ import { useAtom } from 'jotai';
 import { useHydrateAtoms } from 'jotai/utils';
 import { themeAtom, overflowYAtom } from '@/store/hazelStore';
 
-export const Body = () => {
-  const [overflowY, setOverflowY] = useAtom(overflowYAtom);
-  const initialTheme = { value: 'theme-green', label: 'Hijau' };
+export const Body = ({ ...props }) => {
+  const [overflowY] = useAtom(overflowYAtom);
+
+  const { generalTheme } = props.general;
+
+  const initialTheme = {
+    value: `theme-${generalTheme.value}`,
+    label: null,
+  };
   useHydrateAtoms([[themeAtom, initialTheme]]);
 
   useEffect(() => {

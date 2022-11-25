@@ -58,7 +58,7 @@ export const feature = (data: any) => {
 export const featureGeneral = (data: any) => {
   const feature = featureReduce(data);
 
-  const code = `${CODE}-kepada`;
+  const code = `${CODE}-general`;
   const {
     [`${code}-theme`]: generalTheme,
     [`${code}-orderGroomBridge`]: generalOrderGroomBridge,
@@ -95,5 +95,20 @@ export const featureMusic = (data: any) => {
 
   return {
     musicSong,
+  };
+};
+
+export const featureSnowflakes = (data: any) => {
+  const feature = featureReduce(data);
+
+  const code = `${CODE}-snowflakes`;
+  const {
+    [`${code}-image`]: snowflakesImage,
+    [`${code}-total`]: snowflakesTotal,
+  } = feature;
+
+  return {
+    snowflakesImage,
+    snowflakesTotal,
   };
 };

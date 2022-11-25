@@ -1,10 +1,7 @@
 import { Fragment } from 'react';
 import cn from 'classnames';
 import { Listbox, Transition } from '@headlessui/react';
-import {
-  CheckIcon,
-  ChevronUpDownIcon,
-} from '@heroicons/react/20/solid/index.js';
+import { HiCheck, HiChevronUpDown } from 'react-icons/hi2';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@/store/hazelStore';
 
@@ -38,10 +35,7 @@ export const ThemeSwitcher = () => {
           >
             <span className="block truncate">{themeColor.label}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <ChevronUpDownIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
+              <HiChevronUpDown className="h-5 w-5 text-gray-400" />
             </span>
           </Listbox.Button>
           <Transition
@@ -83,7 +77,7 @@ export const ThemeSwitcher = () => {
                             'absolute inset-y-0 left-0 flex items-center pl-3 text-sky-600',
                           )}
                         >
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          <HiCheck className="h-5 w-5" />
                         </span>
                       ) : null}
                     </>

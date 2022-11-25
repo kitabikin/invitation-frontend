@@ -1,7 +1,10 @@
 import { Fragment } from 'react';
 import cn from 'classnames';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import {
+  CheckIcon,
+  ChevronUpDownIcon,
+} from '@heroicons/react/20/solid/index.js';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@/store/hazelStore';
 
